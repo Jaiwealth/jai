@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialWealth — Master Digital Monetization</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1318;
+    --gold: #c9a84c;
+    --gold2: #f0cb6e;
+    --teal: #1de8b5;
+    --teal-dim: rgba(29,232,181,0.12);
+    --white: #f0ede8;
+    --muted: #8a9aaa;
+    --card-bg: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --glow: 0 0 40px rgba(201,168,76,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    backdrop-filter: blur(18px);
+    background: rgba(8,12,16,0.75);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: var(--gold2);
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 0.55rem 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(29,232,181,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,168,76,0.09) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 20% 70%, rgba(29,232,181,0.05) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 75%);
+  }
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    position: relative; z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold2);
+    display: block;
+  }
+  .hero-sub {
+    max-width: 540px;
+    margin: 1.8rem auto 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    position: relative; z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 2.5rem;
+    position: relative; z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 0.85rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.85rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .stat-item {
+    flex: 1; min-width: 160px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.6s forwards;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:nth-child(1) { animation-delay: 0.1s; }
+  .stat-item:nth-child(2) { animation-delay: 0.2s; }
+  .stat-item:nth-child(3) { animation-delay: 0.3s; }
+  .stat-item:nth-child(4) { animation-delay: 0.4s; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--gold2);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* ── CALCULATOR ── */
+  .section { padding: 6rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold2); }
+  .section-sub { color: var(--muted); line-height: 1.7; max-width: 480px; font-size: 0.95rem; }
+
+  .calc-wrapper {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    margin-top: 3.5rem; align-items: start;
+  }
+  .calc-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+  }
+  .calc-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: var(--white);
+  }
+  .form-row { margin-bottom: 1.4rem; }
+  .form-row label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .form-row input, .form-row select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.7rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-row input:focus, .form-row select:focus { border-color: var(--teal); }
+  .form-row select option { background: #111; }
+  .calc-results { display: flex; flex-direction: column; gap: 1rem; }
+  .result-line {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .result-line.highlight { border-left-color: var(--gold); }
+  .result-label { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.5px; }
+  .result-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold2); }
+  .result-total {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(29,232,181,0.08));
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 0.5rem;
+  }
+  .result-total .result-label { color: var(--white); font-size: 0.9rem; font-weight: 500; }
+  .result-total .result-value { font-size: 2.2rem; color: var(--gold2); }
+
+  /* ── MONETIZATION STREAMS ── */
+  .streams-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    margin-top: 3rem;
+  }
+  .stream-card {
+    background: var(--bg);
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .stream-card:hover { background: var(--bg2); }
+  .stream-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--teal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .stream-card:hover::before { transform: scaleX(1); }
+  .stream-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: rgba(255,255,255,0.04);
+    position: absolute; top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+  .stream-icon {
+    width: 44px; height: 44px;
+    background: var(--teal-dim);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+  }
+  .stream-icon.gold { background: rgba(201,168,76,0.12); }
+  .stream-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+  .stream-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; margin-bottom: 1.3rem; }
+  .stream-meta {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .meta-item { }
+  .meta-item .m-label { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .meta-item .m-val { font-size: 0.9rem; color: var(--teal); font-weight: 500; margin-top: 0.1rem; }
+  .meta-item .m-val.gold { color: var(--gold2); }
+  .stream-steps { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .stream-steps p { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.7rem; }
+  .stream-steps ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+  .stream-steps li { font-size: 0.86rem; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 0.5rem; }
+  .stream-steps li::before { content: '→'; color: var(--teal); font-size: 0.8rem; flex-shrink: 0; }
+  .stream-btn {
+    display: inline-block;
+    margin-top: 1.8rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.55rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .stream-btn:hover { border-color: var(--gold); color: var(--gold2); }
+
+  /* ── ROADMAP ── */
+  .roadmap-section { padding: 6rem 2rem; background: var(--bg2); }
+  .roadmap-steps {
+    display: flex; flex-direction: column; gap: 0;
+    margin-top: 3.5rem;
+    position: relative;
+  }
+  .roadmap-steps::before {
+    content: '';
+    position: absolute; left: 28px; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--teal), var(--gold), transparent);
+  }
+  .road-step {
+    display: flex; gap: 2.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.5s forwards;
+  }
+  .road-step:nth-child(1) { animation-delay: 0.1s; }
+  .road-step:nth-child(2) { animation-delay: 0.25s; }
+  .road-step:nth-child(3) { animation-delay: 0.4s; }
+  .road-step:nth-child(4) { animation-delay: 0.55s; }
+  .road-step:nth-child(5) { animation-delay: 0.7s; }
+  .road-step:last-child { border-bottom: none; }
+  .step-dot {
+    width: 56px; height: 56px; flex-shrink: 0;
+    background: var(--bg);
+    border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--teal);
+    position: relative; z-index: 1;
+  }
+  .step-dot.gold { border-color: var(--gold); color: var(--gold2); }
+  .step-content { flex: 1; padding-top: 0.3rem; }
+  .step-content h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+  .step-content p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+  .step-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(29,232,181,0.1);
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .step-badge.gold { background: rgba(201,168,76,0.1); color: var(--gold2); }
+
+  /* ── PLATFORMS ── */
+  .platforms-grid {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+  .platform-pill {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 0.7rem 1.4rem;
+    display: flex; align-items: center; gap: 0.7rem;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .platform-pill:hover { border-color: var(--teal); background: var(--teal-dim); }
+  .platform-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .platform-pill .dot.ig { background: #e1306c; }
+  .platform-pill .dot.yt { background: #ff0000; }
+  .platform-pill .dot.tk { background: #69c9d0; }
+  .platform-pill .dot.li { background: #0077b5; }
+  .platform-pill .dot.x  { background: #888; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .testi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+  }
+  .testi-card::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute; top: 0.5rem; left: 1.2rem;
+    line-height: 1;
+  }
+  .testi-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.5rem;
+    position: relative; z-index: 1;
+    padding-top: 1.5rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+  .testi-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 0.85rem; color: #000;
+  }
+  .testi-name { font-size: 0.85rem; font-weight: 500; }
+  .testi-handle { font-size: 0.75rem; color: var(--muted); }
+  .testi-earn { font-size: 0.78rem; color: var(--teal); margin-top: 0.1rem; }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 7rem 2rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+    background: var(--bg);
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  }
+  .cta-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    position: relative; z-index: 1;
+  }
+  .cta-section h2 span { color: var(--teal); }
+  .cta-section p {
+    color: var(--muted);
+    max-width: 480px;
+    margin: 1.2rem auto 2.5rem;
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+  .cta-section .hero-actions { position: relative; z-index: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 3.5rem 2rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo { font-size: 1.4rem; margin-bottom: 0.8rem; display: block; }
+  .footer-brand p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; max-width: 220px; }
+  .footer-col h5 {
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { color: var(--muted); font-size: 0.78rem; }
+  .newsletter-row { display: flex; gap: 0; margin-top: 1rem; }
+  .newsletter-row input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-right: none;
+    color: var(--white);
+    padding: 0.55rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    outline: none;
+    flex: 1;
+  }
+  .newsletter-row button {
+    background: var(--teal);
+    color: #000;
+    border: none;
+    padding: 0.55rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .newsletter-row button:hover { background: #2fffca; }
+
+  /* ── META FUNNEL ── */
+  .meta-funnel-wrap {
+    margin-top: 3.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .funnel-row {
+    display: flex; gap: 1rem; width: 100%; justify-content: center; flex-wrap: wrap;
+  }
+  .funnel-node {
+    flex: 1; min-width: 200px; max-width: 260px;
+    padding: 1.6rem 1.4rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .funnel-node:hover { transform: translateY(-4px); }
+  .ig-node { border-top: 3px solid #e1306c; }
+  .ig-node:hover { border-color: #e1306c; }
+  .fb-node { border-top: 3px solid #1877f2; }
+  .fb-node:hover { border-color: #1877f2; }
+  .th-node { border-top: 3px solid #aaa; }
+  .th-node:hover { border-color: #fff; }
+  .wa-node { border-top: 3px solid #25d366; }
+  .wa-node:hover { border-color: #25d366; }
+  .fn-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .fn-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 0.15rem; }
+  .fn-handle { font-size: 0.72rem; color: var(--teal); letter-spacing: 0.5px; margin-bottom: 0.6rem; }
+  .fn-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.8rem; }
+  .fn-tactics { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .fn-tactics span {
+    font-size: 0.65rem; letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    color: var(--muted);
+  }
+  .funnel-arrow-row {
+    display: flex; align-items: center; gap: 1rem;
+    width: 100%; padding: 1.5rem 0;
+  }
+  .funnel-arrow-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  }
+  .funnel-arrow-label {
+    font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--teal); white-space: nowrap;
+  }
+  .funnel-hub {
+    position: relative;
+    width: 100%; max-width: 600px;
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 2.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(29,232,181,0.04));
+    overflow: hidden;
+  }
+  .hub-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.08), transparent);
+    pointer-events: none;
+  }
+  .hub-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .hub-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: 2px;
+    color: var(--gold2); margin-bottom: 0.3rem;
+  }
+  .hub-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.2rem; }
+  .hub-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .hub-tags span {
+    font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold2);
+    padding: 0.3rem 0.8rem;
+  }
+  .funnel-bottom { margin-top: 0; }
+  .output-node {
+    flex: 1; min-width: 130px; max-width: 200px;
+    padding: 1.4rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .output-node:hover { background: var(--card-bg); }
+  .out-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+  .out-label { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  .out-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold2); }
+  .meta-cards-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    margin-top: 3rem;
+  }
+  .meta-tactic-card { background: var(--bg); }
+  .mtc-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .ig-header  { background: rgba(225,48,108,0.1); }
+  .fb-header  { background: rgba(24,119,242,0.1); }
+  .th-header  { background: rgba(255,255,255,0.05); }
+  .wa-header  { background: rgba(37,211,102,0.1); }
+  .mtc-icon { font-size: 1.2rem; }
+  .mtc-name { font-size: 0.85rem; font-weight: 500; flex: 1; }
+  .mtc-handle { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.5px; }
+  .mtc-list { list-style: none; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .mtc-list li { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
+  .mtc-list li strong { color: var(--white); font-weight: 500; }
+  .mtc-metric {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    font-size: 0.75rem;
+  }
+  .mtc-metric span { color: var(--muted); }
+  .mtc-metric strong { color: var(--teal); font-weight: 500; }
+  @media (max-width: 900px) { .meta-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .meta-cards-grid { grid-template-columns: 1fr; } .funnel-node { max-width: 100%; } }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .calc-wrapper { grid-template-columns: 1fr; }
+    .streams-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .roadmap-steps::before { display: none; }
+    .road-step { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Social<span>Wealth</span></span>
+  <ul class="nav-links">
+    <li><a href="#streams">Strategies</a></li>
+    <li><a href="#meta-funnel">Meta Funnel</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#success">Stories</a></li>
+  </ul>
+  <button class="nav-cta">Get Started</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-tag" style="position:relative;z-index:1;">Path to Financial Freedom</p>
+  <h1 style="position:relative;z-index:1;">Master the Art of<em>Digital Monetization</em></h1>
+  <p class="hero-sub">Stop guessing your revenue. Follow the validated roadmap used by top 1% creators to scale from zero to six-figure monthly earnings through social-powered websites.</p>
+  <div class="hero-actions">
+    <a href="#calculator" class="btn-primary">Calculate My Revenue</a>
+    <a href="#roadmap" class="btn-outline">View the Roadmap</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">5,000+</div><div class="stat-label">Creators Scaled</div></div>
+  <div class="stat-item"><div class="stat-num">$12M+</div><div class="stat-label">Revenue Generated</div></div>
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Revenue Streams</div></div>
+  <div class="stat-item"><div class="stat-num">90%</div><div class="stat-label">Avg Profit Margin</div></div>
+</div>
+
+<!-- CALCULATOR -->
+<section class="section" id="calculator">
+  <div class="container">
+    <p class="section-tag">Revenue Predictor</p>
+    <h2 class="section-title">Calculate Your <em>Potential</em></h2>
+    <p class="section-sub">Enter your niche and audience size to see what you could realistically earn each month with the right monetization stack.</p>
+
+    <div class="calc-wrapper">
+      <div class="calc-card">
+        <h3>Your Audience Profile</h3>
+        <div class="form-row">
+          <label>Niche / Industry</label>
+          <select id="niche" onchange="calculate()">
+            <option value="finance">Finance & Business</option>
+            <option value="lifestyle">Lifestyle & Travel</option>
+            <option value="tech">Tech & SaaS</option>
+            <option value="health">Health & Fitness</option>
+            <option value="education">Education & Courses</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Total Followers (across platforms)</label>
+          <input type="number" id="followers" value="80000" oninput="calculate()">
+        </div>
+        <div class="form-row">
+          <label>Monthly Views / Impressions</label>
+          <input type="number" id="views" value="250000" oninput="calculate()">
+        </div>
+        <div class="form-row">
+          <label>Engagement Rate (%)</label>
+          <input type="number" id="engagement" value="4.5" step="0.1" oninput="calculate()">
+        </div>
+        <div class="form-row">
+          <label>Email List Size</label>
+          <input type="number" id="emaillist" value="12000" oninput="calculate()">
+        </div>
+      </div>
+
+      <div>
+        <div class="calc-results" id="results">
+          <div class="result-line highlight">
+            <span class="result-label">Est. AdSense Revenue</span>
+            <span class="result-value" id="adsense-val">$4,300</span>
+          </div>
+          <div class="result-line highlight">
+            <span class="result-label">Est. Affiliate Income</span>
+            <span class="result-value" id="affiliate-val">$8,150</span>
+          </div>
+          <div class="result-line highlight">
+            <span class="result-label">Sponsorship Potential</span>
+            <span class="result-value" id="sponsor-val">$6,400</span>
+          </div>
+          <div class="result-line highlight">
+            <span class="result-label">Digital Product Sales</span>
+            <span class="result-value" id="product-val">$9,200</span>
+          </div>
+        </div>
+        <div class="result-total" style="margin-top:1rem;">
+          <span class="result-label">Total Monthly Potential</span>
+          <span class="result-value" id="total-val">$28,050</span>
+        </div>
+        <a href="#streams" class="btn-primary" style="display:block;text-align:center;margin-top:1.2rem;">Unlock This Revenue →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONETIZATION STREAMS -->
+<section class="section" id="streams" style="background:var(--bg2);padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <p class="section-tag">Monetization Streams</p>
+    <h2 class="section-title">Four Pillars of <em>Social Revenue</em></h2>
+    <p class="section-sub">Each stream compounds the others. Build them in sequence for maximum leverage and passive income.</p>
+
+    <div class="streams-grid">
+      <!-- 1 -->
+      <div class="stream-card">
+        <div class="stream-num">01</div>
+        <div class="stream-icon">📊</div>
+        <h3>Google AdSense</h3>
+        <p>The foundation of creator revenue. Enable automated, scalable ad income on your branded website by routing social traffic to high-CPM content.</p>
+        <div class="stream-meta">
+          <div class="meta-item">
+            <div class="m-label">Entry</div>
+            <div class="m-val">1k Subs / 4k Hours</div>
+          </div>
+          <div class="meta-item">
+            <div class="m-label">Avg Earnings</div>
+            <div class="m-val gold">$500 – $5k / mo</div>
+          </div>
+        </div>
+        <div class="stream-steps">
+          <p>First Steps</p>
+          <ul>
+            <li>Enable Monetization in Creator Studio</li>
+            <li>Optimize video metadata for high-CPM niches</li>
+            <li>Build a niche website with SEO-targeted content</li>
+          </ul>
+        </div>
+        <a href="#" class="stream-btn">View Full Guide</a>
+      </div>
+
+      <!-- 2 -->
+      <div class="stream-card">
+        <div class="stream-num">02</div>
+        <div class="stream-icon gold">🎯</div>
+        <h3>High-Ticket Affiliates</h3>
+        <p>Promote tools you use and earn recurring commissions. Decouple your income from your time with programs that pay $100–$1,000+ per referral.</p>
+        <div class="stream-meta">
+          <div class="meta-item">
+            <div class="m-label">Entry</div>
+            <div class="m-val">Targeted Audience Trust</div>
+          </div>
+          <div class="meta-item">
+            <div class="m-label">Avg Earnings</div>
+            <div class="m-val gold">$2k – $10k / mo</div>
+          </div>
+        </div>
+        <div class="stream-steps">
+          <p>First Steps</p>
+          <ul>
+            <li>Audit your workflow for monetizable tools</li>
+            <li>Apply for "Pro" partner programs only</li>
+            <li>Add affiliate links to evergreen content</li>
+          </ul>
+        </div>
+        <a href="#" class="stream-btn">Join the Network</a>
+      </div>
+
+      <!-- 3 -->
+      <div class="stream-card">
+        <div class="stream-num">03</div>
+        <div class="stream-icon">🤝</div>
+        <h3>Direct Sponsorships</h3>
+        <p>Partner with global brands for premium placements. The ultimate sign of creator authority, commanding $5k–$25k+ per post with 10k+ loyal followers.</p>
+        <div class="stream-meta">
+          <div class="meta-item">
+            <div class="m-label">Entry</div>
+            <div class="m-val">10k+ Loyal Followers</div>
+          </div>
+          <div class="meta-item">
+            <div class="m-label">Avg Earnings</div>
+            <div class="m-val gold">$5k – $25k / post</div>
+          </div>
+        </div>
+        <div class="stream-steps">
+          <p>First Steps</p>
+          <ul>
+            <li>Build a high-fidelity Media Kit</li>
+            <li>Pitch brands with data-backed proposals</li>
+            <li>Set rates at 1% of follower count minimum</li>
+          </ul>
+        </div>
+        <a href="#" class="stream-btn">Download Pitch Deck</a>
+      </div>
+
+      <!-- 4 -->
+      <div class="stream-card">
+        <div class="stream-num">04</div>
+        <div class="stream-icon gold">🚀</div>
+        <h3>Premium Courses & Products</h3>
+        <p>Productize your expertise. The pinnacle of the roadmap, offering 90%+ margins and infinite scalability. Solve a $1,000 problem for a $500 solution.</p>
+        <div class="stream-meta">
+          <div class="meta-item">
+            <div class="m-label">Entry</div>
+            <div class="m-val">Proven Results + Authority</div>
+          </div>
+          <div class="meta-item">
+            <div class="m-label">Avg Earnings</div>
+            <div class="m-val gold">$10k – $100k+ / mo</div>
+          </div>
+        </div>
+        <div class="stream-steps">
+          <p>First Steps</p>
+          <ul>
+            <li>Identify a $1,000 problem you can solve</li>
+            <li>Build a waitlist using a "Beta" offer</li>
+            <li>Launch to email list before public release</li>
+          </ul>
+        </div>
+        <a href="#" class="stream-btn">Launch Your Asset</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- META FUNNEL SECTION -->
+<section class="section" id="meta-funnel" style="background:var(--bg2);padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <p class="section-tag">Meta Ecosystem</p>
+    <h2 class="section-title">The Complete <em>Meta Funnel</em></h2>
+    <p class="section-sub">Facebook, Instagram, WhatsApp, and Threads form one connected monetization machine. Here's how to wire them together into a revenue pipeline.</p>
+
+    <!-- Funnel Flow Diagram -->
+    <div class="meta-funnel-wrap">
+
+      <!-- Top: Entry Points -->
+      <div class="funnel-row funnel-top">
+        <div class="funnel-node ig-node">
+          <div class="fn-icon">📸</div>
+          <div class="fn-title">Instagram</div>
+          <div class="fn-handle">@yourbrand</div>
+          <div class="fn-desc">Reels for reach · Stories for trust · Link-in-Bio to site</div>
+          <div class="fn-tactics">
+            <span>Collab posts</span><span>Close Friends list</span><span>Paid Ads</span>
+          </div>
+        </div>
+        <div class="funnel-node fb-node">
+          <div class="fn-icon">👥</div>
+          <div class="fn-title">Facebook</div>
+          <div class="fn-handle">fb.com/yourbrand</div>
+          <div class="fn-desc">Groups for community · Reels for discovery · Meta Ads retargeting</div>
+          <div class="fn-tactics">
+            <span>FB Groups</span><span>Meta Ads</span><span>Marketplace</span>
+          </div>
+        </div>
+        <div class="funnel-node th-node">
+          <div class="fn-icon">🧵</div>
+          <div class="fn-title">Threads</div>
+          <div class="fn-handle">@yourbrand</div>
+          <div class="fn-desc">Thought leadership · Viral text posts · Cross-post to Instagram</div>
+          <div class="fn-tactics">
+            <span>Thread storms</span><span>IG cross-post</span><span>Replies strategy</span>
+          </div>
+        </div>
+        <div class="funnel-node wa-node">
+          <div class="fn-icon">💬</div>
+          <div class="fn-title">WhatsApp</div>
+          <div class="fn-handle">Channel / Business</div>
+          <div class="fn-desc">Broadcast channel for offers · Direct DM sales · Status updates</div>
+          <div class="fn-tactics">
+            <span>WA Channel</span><span>Broadcast lists</span><span>Catalog</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div class="funnel-arrow-row">
+        <div class="funnel-arrow-line"></div>
+        <div class="funnel-arrow-label">Traffic Flows to Your Branded Website</div>
+        <div class="funnel-arrow-line"></div>
+      </div>
+
+      <!-- Middle: Website Hub -->
+      <div class="funnel-hub">
+        <div class="hub-glow"></div>
+        <div class="hub-inner">
+          <div class="hub-icon">🌐</div>
+          <div class="hub-title">Your Branded Website</div>
+          <div class="hub-sub">The monetization engine — where all Meta traffic converts</div>
+          <div class="hub-tags">
+            <span>Email Capture</span>
+            <span>AdSense Pages</span>
+            <span>Affiliate Links</span>
+            <span>Course Sales</span>
+            <span>Sponsor Content</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div class="funnel-arrow-row" style="margin-top:0;">
+        <div class="funnel-arrow-line"></div>
+        <div class="funnel-arrow-label">Converts Into Revenue Streams</div>
+        <div class="funnel-arrow-line"></div>
+      </div>
+
+      <!-- Bottom: Revenue Outputs -->
+      <div class="funnel-row funnel-bottom">
+        <div class="output-node">
+          <div class="out-icon" style="color:var(--gold2)">💰</div>
+          <div class="out-label">Ad Revenue</div>
+          <div class="out-val">$500–$5k/mo</div>
+        </div>
+        <div class="output-node">
+          <div class="out-icon" style="color:var(--teal)">🔗</div>
+          <div class="out-label">Affiliates</div>
+          <div class="out-val">$2k–$10k/mo</div>
+        </div>
+        <div class="output-node">
+          <div class="out-icon" style="color:#e1306c">🤝</div>
+          <div class="out-label">Sponsorships</div>
+          <div class="out-val">$5k–$25k/deal</div>
+        </div>
+        <div class="output-node">
+          <div class="out-icon" style="color:var(--gold2)">🚀</div>
+          <div class="out-label">Products</div>
+          <div class="out-val">$10k–$100k/mo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meta Platform Tactics Cards -->
+    <div class="meta-cards-grid">
+      <div class="meta-tactic-card">
+        <div class="mtc-header ig-header">
+          <span class="mtc-icon">📸</span>
+          <span class="mtc-name">Instagram Funnel</span>
+          <span class="mtc-handle">@handle</span>
+        </div>
+        <ul class="mtc-list">
+          <li><strong>Reels</strong> — 30s value clips driving profile visits</li>
+          <li><strong>Stories</strong> — Daily polls, Q&As, swipe-up links</li>
+          <li><strong>Link-in-Bio</strong> — Linktree or custom landing page</li>
+          <li><strong>Close Friends</strong> — Exclusive offers for superfans</li>
+          <li><strong>Collabs</strong> — Co-author posts for 2x reach</li>
+          <li><strong>Meta Ads</strong> — Retarget website visitors</li>
+        </ul>
+        <div class="mtc-metric"><span>Avg CTR to Site</span><strong>3.2%</strong></div>
+      </div>
+
+      <div class="meta-tactic-card">
+        <div class="mtc-header fb-header">
+          <span class="mtc-icon">👥</span>
+          <span class="mtc-name">Facebook Funnel</span>
+          <span class="mtc-handle">fb.com/page</span>
+        </div>
+        <ul class="mtc-list">
+          <li><strong>FB Groups</strong> — Build owned community, push offers</li>
+          <li><strong>Page Reels</strong> — Cross-post Instagram Reels</li>
+          <li><strong>Meta Ads</strong> — Lookalike audiences from email list</li>
+          <li><strong>Facebook Shop</strong> — Sell digital products natively</li>
+          <li><strong>Live streams</strong> — Real-time product launches</li>
+          <li><strong>Events</strong> — Webinar funnels and lead gen</li>
+        </ul>
+        <div class="mtc-metric"><span>Avg CPM (Ads)</span><strong>$6–$14</strong></div>
+      </div>
+
+      <div class="meta-tactic-card">
+        <div class="mtc-header th-header">
+          <span class="mtc-icon">🧵</span>
+          <span class="mtc-name">Threads Funnel</span>
+          <span class="mtc-handle">@handle</span>
+        </div>
+        <ul class="mtc-list">
+          <li><strong>Thread storms</strong> — 10-post value threads go viral</li>
+          <li><strong>Hooks</strong> — First line decides reach, craft it sharp</li>
+          <li><strong>Cross-post</strong> — Auto-share to Instagram grid/stories</li>
+          <li><strong>Reply strategy</strong> — Comment on big creators for exposure</li>
+          <li><strong>Link posts</strong> — Drive directly to blog/product pages</li>
+          <li><strong>Polls</strong> — Boost algorithmic distribution</li>
+        </ul>
+        <div class="mtc-metric"><span>Reach Multiplier</span><strong>Up to 4x IG</strong></div>
+      </div>
+
+      <div class="meta-tactic-card">
+        <div class="mtc-header wa-header">
+          <span class="mtc-icon">💬</span>
+          <span class="mtc-name">WhatsApp Funnel</span>
+          <span class="mtc-handle">Channel / Business</span>
+        </div>
+        <ul class="mtc-list">
+          <li><strong>WA Channel</strong> — Broadcast content to subscribers free</li>
+          <li><strong>Business API</strong> — Automated lead nurture sequences</li>
+          <li><strong>Status updates</strong> — 24h offers visible to all contacts</li>
+          <li><strong>Catalog</strong> — Showcase digital products in-app</li>
+          <li><strong>Click-to-WA Ads</strong> — FB/IG ads that open WA chat</li>
+          <li><strong>Broadcast lists</strong> — Segment & send targeted offers</li>
+        </ul>
+        <div class="mtc-metric"><span>Avg Open Rate</span><strong>95%+</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="section" id="platforms">
+  <div class="container">
+    <p class="section-tag">All Traffic Sources</p>
+    <h2 class="section-title">Drive Traffic from <em>Every Platform</em></h2>
+    <p class="section-sub">Meta + beyond. Route engaged followers from every channel to your branded website where monetization compounds at scale.</p>
+    <div class="platforms-grid">
+      <div class="platform-pill"><span class="dot ig"></span> Instagram — Reels & Stories to Link-in-Bio</div>
+      <div class="platform-pill"><span class="dot" style="background:#1877f2"></span> Facebook — Groups, Pages & Meta Ads</div>
+      <div class="platform-pill"><span class="dot" style="background:#000"></span> Threads — Viral text posts & IG cross-post</div>
+      <div class="platform-pill"><span class="dot" style="background:#25d366"></span> WhatsApp — Channel broadcasts & DM sales</div>
+      <div class="platform-pill"><span class="dot yt"></span> YouTube — Long-form + Shorts funnel</div>
+      <div class="platform-pill"><span class="dot tk"></span> TikTok — Viral discovery to email capture</div>
+      <div class="platform-pill"><span class="dot li"></span> LinkedIn — B2B authority & sponsorships</div>
+      <div class="platform-pill"><span class="dot x"></span> X / Twitter — Thought leadership threads</div>
+      <div class="platform-pill"><span class="dot" style="background:var(--gold)"></span> Amazon Associates — Product review content</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="container">
+    <p class="section-tag">The Proven Path</p>
+    <h2 class="section-title">Your Six-Figure <em>Creator Roadmap</em></h2>
+    <p class="section-sub">Five sequential phases. Each unlocks the next. Follow in order for the fastest path to consistent monthly revenue.</p>
+
+    <div class="roadmap-steps">
+      <div class="road-step">
+        <div class="step-dot">01</div>
+        <div class="step-content">
+          <span class="step-badge">Foundation</span>
+          <h4>Build a Niche Brand & Website</h4>
+          <p>Choose a specific, high-value niche and launch a branded website. Set up your content hub with SEO-optimized pages, an email capture, and linked social profiles. Your site is your monetization engine.</p>
+        </div>
+      </div>
+      <div class="road-step">
+        <div class="step-dot">02</div>
+        <div class="step-content">
+          <span class="step-badge">Audience</span>
+          <h4>Grow an Engaged Audience</h4>
+          <p>Post consistently across 1–2 platforms. Prioritize engagement rate over follower count. Aim for 10,000+ followers with 4%+ engagement before activating paid monetization — quality over quantity.</p>
+        </div>
+      </div>
+      <div class="road-step">
+        <div class="step-dot gold">03</div>
+        <div class="step-content">
+          <span class="step-badge gold">Monetize</span>
+          <h4>Activate AdSense & Affiliates</h4>
+          <p>Enable Google AdSense on your website and join 3–5 high-ticket affiliate programs relevant to your niche. Route social traffic to content pages with embedded affiliate links for passive income stacking.</p>
+        </div>
+      </div>
+      <div class="road-step">
+        <div class="step-dot gold">04</div>
+        <div class="step-content">
+          <span class="step-badge gold">Scale</span>
+          <h4>Land Brand Sponsorships</h4>
+          <p>Create a professional media kit with audience demographics, engagement stats, and past results. Pitch 10 brands per week. Start with micro-deals ($500–$2k) to build your sponsorship portfolio and testimonials.</p>
+        </div>
+      </div>
+      <div class="road-step">
+        <div class="step-dot gold">05</div>
+        <div class="step-content">
+          <span class="step-badge gold">Compound</span>
+          <h4>Launch Your Digital Product</h4>
+          <p>Productize your expertise into a course, template pack, or membership. Launch to your email list first with a Beta offer at 50% discount. Use testimonials to fuel your full public launch at full price.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="success">
+  <div class="container">
+    <p class="section-tag">Success Stories</p>
+    <h2 class="section-title">Creators Who <em>Made It Work</em></h2>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <p>Followed the affiliate roadmap and went from $0 to $8,400/month in under 6 months. The niche selection framework alone was worth it.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AK</div>
+          <div>
+            <div class="testi-name">Arjun K.</div>
+            <div class="testi-handle">@arjunfinds · Finance Niche</div>
+            <div class="testi-earn">↑ $8,400 / month</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p>My course launch made $22k in the first week using the email list strategy. The waitlist method is pure gold — never launching cold again.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SR</div>
+          <div>
+            <div class="testi-name">Sofia R.</div>
+            <div class="testi-handle">@sofiacreates · EdTech</div>
+            <div class="testi-earn">↑ $22,000 launch week</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p>Landed my first $15k sponsorship deal at 18k followers. The media kit template and pitch script made me look like a seasoned pro.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MT</div>
+          <div>
+            <div class="testi-name">Marcus T.</div>
+            <div class="testi-handle">@marcusbuildz · Tech</div>
+            <div class="testi-earn">↑ $15,000 first deal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Scale Your <span>Digital Prestige?</span></h2>
+  <p>Join 5,000+ high-performing creators who have already unlocked the full roadmap and built their six-figure social wealth.</p>
+  <div class="hero-actions" style="position:relative;z-index:1;">
+    <a href="#" class="btn-primary">Get Lifetime Access</a>
+    <a href="#" class="btn-outline">Talk to a Strategy Expert →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-logo">Social<span style="color:var(--teal)">Wealth</span></span>
+      <p>The complete framework for turning social media audiences into scalable digital income.</p>
+      <div class="newsletter-row" style="margin-top:1.2rem;">
+        <input type="email" placeholder="Your email">
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">Growth Guide</a></li>
+        <li><a href="#">Roadmap</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Templates</a></li>
+        <li><a href="#">Case Studies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 SocialWealth. All rights reserved.</p>
+    <p style="color:var(--muted);font-size:0.75rem;">Results not typical. Individual outcomes vary based on effort and niche.</p>
+  </div>
+</footer>
+
+<script>
+  const niches = {
+    finance:   { cpm: 18, affRate: 0.035, sponsorPer1k: 80,  productConv: 0.012 },
+    lifestyle: { cpm: 8,  affRate: 0.018, sponsorPer1k: 40,  productConv: 0.008 },
+    tech:      { cpm: 22, affRate: 0.04,  sponsorPer1k: 100, productConv: 0.015 },
+    health:    { cpm: 12, affRate: 0.025, sponsorPer1k: 55,  productConv: 0.01  },
+    education: { cpm: 14, affRate: 0.03,  sponsorPer1k: 65,  productConv: 0.018 },
+  };
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function calculate() {
+    const niche = document.getElementById('niche').value;
+    const followers = parseFloat(document.getElementById('followers').value) || 0;
+    const views = parseFloat(document.getElementById('views').value) || 0;
+    const engagement = parseFloat(document.getElementById('engagement').value) || 0;
+    const emailList = parseFloat(document.getElementById('emaillist').value) || 0;
+
+    const n = niches[niche];
+    const adsense = (views / 1000) * n.cpm * 0.68;
+    const affiliate = views * n.affRate * (engagement / 100) * 12;
+    const sponsor = (followers / 1000) * n.sponsorPer1k * Math.min(engagement / 3, 2);
+    const product = emailList * n.productConv * 297;
+
+    document.getElementById('adsense-val').textContent = fmt(adsense);
+    document.getElementById('affiliate-val').textContent = fmt(affiliate);
+    document.getElementById('sponsor-val').textContent = fmt(sponsor);
+    document.getElementById('product-val').textContent = fmt(product);
+    document.getElementById('total-val').textContent = fmt(adsense + affiliate + sponsor + product);
+  }
+
+  calculate();
+</script>
+</body>
+</html>
